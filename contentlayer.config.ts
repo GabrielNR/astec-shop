@@ -1,6 +1,6 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import remarkGfm from 'remark-gfm'; 
-import rehypeSlug from 'rehype-slug';
+import * as remarkGfm from 'remark-gfm'; 
+import * as rehypeSlug from 'rehype-slug';
 // Define o esquema do seu Post
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -31,15 +31,17 @@ export const Post = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: 'content', // Nome da pasta que contém a subpasta 'posts'
+  contentDirPath: 'content', 
   documentTypes: [Post],
 
   mdx: {
     remarkPlugins: [
-      remarkGfm 
+      // 🛑 USO CORRIGIDO 🛑
+      remarkGfm.default 
     ],
     rehypePlugins: [
-      rehypeSlug, 
+      // 🛑 USO CORRIGIDO 🛑
+      rehypeSlug.default, 
     ],
   },
 });
