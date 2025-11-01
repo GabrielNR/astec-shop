@@ -1,9 +1,9 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-
+import remarkGfm from 'remark-gfm'; 
+import rehypeSlug from 'rehype-slug';
 // Define o esquema do seu Post
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  // Onde o Contentlayer deve procurar seus posts
   filePathPattern: 'posts/**/*.mdx', 
   contentType: 'mdx', // Informa ao Contentlayer que o conteúdo é MDX
   
@@ -33,4 +33,13 @@ export const Post = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'content', // Nome da pasta que contém a subpasta 'posts'
   documentTypes: [Post],
+
+  mdx: {
+    remarkPlugins: [
+      remarkGfm 
+    ],
+    rehypePlugins: [
+      rehypeSlug, 
+    ],
+  },
 });
